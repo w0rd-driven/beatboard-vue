@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->id();
+            $table->string('spotify_id');
+            $table->string('name');
+            $table->string('image_url');
+            $table->unsignedBigInteger('follower_count');
+            $table->dateTime('last_searched_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
