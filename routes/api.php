@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->post('/artist/search', ArtistSearchController::class)->name('artist.search');
+Route::post('/artist/search', ArtistSearchController::class)->name('artist.search');

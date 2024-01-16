@@ -1,11 +1,11 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SearchBar from '@/Components/SearchBar.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
+let previousValue = null;
 const searchTextInput = ref(null);
 
 const form = useForm({
@@ -15,7 +15,10 @@ const form = useForm({
 const searchArtist = () => {
     form.post(route('artist.search'), {
         preserveScroll: true,
-        onSuccess: () => form.reset(),
+        onSuccess: () => {
+            previousValue = form.search_text
+            form.reset()
+        },
         onError: () => {
             if (form.errors.search_text) {
                 form.reset('search_text');
@@ -60,7 +63,7 @@ const searchArtist = () => {
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">{{ previousValue }} Found.</p>
                 </Transition>
             </div>
         </form>
