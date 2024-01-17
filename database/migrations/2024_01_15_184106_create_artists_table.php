@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('image_url');
             $table->unsignedBigInteger('follower_count');
-            $table->dateTime('last_searched_at');
+            $table->dateTime('searched_at');
             $table->timestamps();
             $table->softDeletes();
         });

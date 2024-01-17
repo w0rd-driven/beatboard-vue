@@ -20,7 +20,7 @@ class Artist extends Model
         'name',
         'image_url',
         'follower_count',
-        'last_searched_at',
+        'searched_at',
     ];
 
     /**
@@ -33,6 +33,6 @@ class Artist extends Model
         'name' => 'string',
         'image_url' => 'string',
         'follower_count' => 'integer',
-        'last_searched_at' => 'datetime',
+        'searched_at' => 'datetime',
     ];
 }

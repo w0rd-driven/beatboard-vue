@@ -15,14 +15,13 @@ class ArtistRepository
 
     public function searchArtists($query)
     {
-        Log::channel('search')->debug("ArtistSearchRepository: Searching {$query}");
+        Log::channel('search')->debug("ArtistRepository: Searching {$query}");
 
         $response = Spotify::searchArtists($query)->get();
         $items = collect(Arr::get($response, 'artists.items', []));
 
-        // Ideally we'd pick the one with the most followers
         return $items->filter(function ($artist) use ($query) {
             return Arr::get($artist, 'name') === $query && Arr::get($artist, 'type') === 'artist';
-        })?->first();
+        })?->sortByDesc('followers.total')?->first();
     }
 }

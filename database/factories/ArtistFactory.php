@@ -21,7 +21,7 @@ class ArtistFactory extends Factory
             'name' => $this->faker->company(),
             'image_url' => $this->faker->imageUrl(),
             'follower_count' => $this->faker->numberBetween(1),
-            'last_searched_at' => $this->faker->dateTimeThisMonth(),
+            'searched_at' => $this->faker->dateTimeThisMonth(),
         ];
     }
 
