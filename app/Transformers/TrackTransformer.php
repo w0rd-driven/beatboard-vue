@@ -13,7 +13,7 @@ class TrackTransformer
     {
     }
 
-    public function transform(?Artist $artist, ?array $track): array
+    public function transform(?array $track): array
     {
         $name = Arr::get($track, 'name');
         Log::channel('search')->debug("TrackTransformer: Transforming track {$name}");

@@ -14,36 +14,44 @@ describe("transform", function () {
     it('returns normalized', function () {
         $artist = [
             "external_urls" => [
-                "spotify" => "https://open.spotify.com/artist/6zreklnHnGi9Zfr2WhaO5a",
+                "spotify" => "https://open.spotify.com/artist/2yEwvVSSSUkcLeSTNyHKh8",
             ],
             "followers" => [
                 "href" => null,
-                "total" => 182636,
+                "total" => 3462577,
             ],
-            "genres" => [],
-            "href" => "https://api.spotify.com/v1/artists/6zreklnHnGi9Zfr2WhaO5a",
-            "id" => "6zreklnHnGi9Zfr2WhaO5a",
+            "genres" => [
+                "alternative metal",
+                "art rock",
+                "nu metal",
+                "post-grunge",
+                "progressive metal",
+                "progressive rock",
+                "rock",
+            ],
+            "href" => "https://api.spotify.com/v1/artists/2yEwvVSSSUkcLeSTNyHKh8",
+            "id" => "2yEwvVSSSUkcLeSTNyHKh8",
             "images" => [
                 [
                     "height" => 640,
-                    "url" => "https://i.scdn.co/image/ab67616d0000b273d57727511e6036d977b2f4dc",
+                    "url" => "https://i.scdn.co/image/ab6761610000e5eb13f5472b709101616c87cba3",
                     "width" => 640,
                 ],
                 [
-                    "height" => 300,
-                    "url" => "https://i.scdn.co/image/ab67616d00001e02d57727511e6036d977b2f4dc",
-                    "width" => 300,
+                    "height" => 320,
+                    "url" => "https://i.scdn.co/image/ab6761610000517413f5472b709101616c87cba3",
+                    "width" => 320,
                 ],
                 [
-                    "height" => 64,
-                    "url" => "https://i.scdn.co/image/ab67616d00004851d57727511e6036d977b2f4dc",
-                    "width" => 64,
+                    "height" => 160,
+                    "url" => "https://i.scdn.co/image/ab6761610000f17813f5472b709101616c87cba3",
+                    "width" => 160,
                 ],
             ],
-            "name" => "Tool",
-            "popularity" => 3,
+            "name" => "TOOL",
+            "popularity" => 69,
             "type" => "artist",
-            "uri" => "spotify:artist:6zreklnHnGi9Zfr2WhaO5a",
+            "uri" => "spotify:artist:2yEwvVSSSUkcLeSTNyHKh8",
         ];
 
         $expectedImage = $this->transformer->largestImage($artist);
@@ -73,36 +81,44 @@ describe("largestImage", function () {
     it('returns the largest image', function () {
         $artist = [
             "external_urls" => [
-                "spotify" => "https://open.spotify.com/artist/6zreklnHnGi9Zfr2WhaO5a",
+                "spotify" => "https://open.spotify.com/artist/2yEwvVSSSUkcLeSTNyHKh8",
             ],
             "followers" => [
                 "href" => null,
-                "total" => 182636,
+                "total" => 3462577,
             ],
-            "genres" => [],
-            "href" => "https://api.spotify.com/v1/artists/6zreklnHnGi9Zfr2WhaO5a",
-            "id" => "6zreklnHnGi9Zfr2WhaO5a",
+            "genres" => [
+                "alternative metal",
+                "art rock",
+                "nu metal",
+                "post-grunge",
+                "progressive metal",
+                "progressive rock",
+                "rock",
+            ],
+            "href" => "https://api.spotify.com/v1/artists/2yEwvVSSSUkcLeSTNyHKh8",
+            "id" => "2yEwvVSSSUkcLeSTNyHKh8",
             "images" => [
                 [
                     "height" => 640,
-                    "url" => "https://i.scdn.co/image/ab67616d0000b273d57727511e6036d977b2f4dc",
+                    "url" => "https://i.scdn.co/image/ab6761610000e5eb13f5472b709101616c87cba3",
                     "width" => 640,
                 ],
                 [
-                    "height" => 300,
-                    "url" => "https://i.scdn.co/image/ab67616d00001e02d57727511e6036d977b2f4dc",
-                    "width" => 300,
+                    "height" => 320,
+                    "url" => "https://i.scdn.co/image/ab6761610000517413f5472b709101616c87cba3",
+                    "width" => 320,
                 ],
                 [
-                    "height" => 64,
-                    "url" => "https://i.scdn.co/image/ab67616d00004851d57727511e6036d977b2f4dc",
-                    "width" => 64,
+                    "height" => 160,
+                    "url" => "https://i.scdn.co/image/ab6761610000f17813f5472b709101616c87cba3",
+                    "width" => 160,
                 ],
             ],
-            "name" => "Tool",
-            "popularity" => 3,
+            "name" => "TOOL",
+            "popularity" => 69,
             "type" => "artist",
-            "uri" => "spotify:artist:6zreklnHnGi9Zfr2WhaO5a",
+            "uri" => "spotify:artist:2yEwvVSSSUkcLeSTNyHKh8",
         ];
 
         $expected = 640;

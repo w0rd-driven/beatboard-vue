@@ -37,7 +37,7 @@ class ArtistSearchController extends Controller
             $transformer = new TrackTransformer();
 
             foreach($tracks as $track) {
-                $attributes = $transformer->transform($artist, $track);
+                $attributes = $transformer->transform($track);
                 $track = $artist->tracks()->updateOrCreate(
                     ['spotify_id' => Arr::get($attributes, 'spotify_id')],
                     $attributes,
