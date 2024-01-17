@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,10 @@ Route::get('/search', function () {
 })->middleware(['auth', 'verified'])->name('search');
 
 Route::middleware('auth')->group(function () {
+    // Artist
+    Route::get('/artists', [ArtistController::class, 'index'])->name('artist.index');
+    Route::get('/artists/{artist}/show', [ArtistController::class, 'show'])->name('artist.show');
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
