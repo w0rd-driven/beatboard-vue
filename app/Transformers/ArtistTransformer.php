@@ -28,7 +28,7 @@ class ArtistTransformer
             'name' => $name,
             'image_url' => $imageUrl,
             'follower_count' => Arr::get($artist, 'followers.total'),
-            'last_searched_at' => CarbonImmutable::now(),
+            'searched_at' => CarbonImmutable::now(),
         ];
     }
 

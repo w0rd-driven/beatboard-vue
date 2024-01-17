@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArtistSearchRequest;
 use App\Models\Artist;
+use App\Models\Track;
 use App\Repositories\ArtistRepository;
 use App\Transformers\ArtistTransformer;
+use App\Transformers\TrackTransformer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -29,6 +31,20 @@ class ArtistSearchController extends Controller
         );
 
         Log::channel('search')->debug("ArtistSearchController: Artist {$artist?->spotify_id} saved.");
+
+        if ($artist) {
+            $tracks = (new ArtistRepository)->getTopTracks($artist);
+            $transformer = new TrackTransformer();
+
+            foreach($tracks as $track) {
+                $attributes = $transformer->transform($artist, $track);
+                $track = $artist->tracks()->updateOrCreate(
+                    ['spotify_id' => Arr::get($attributes, 'spotify_id')],
+                    $attributes,
+                );
+                Log::channel('search')->debug("ArtistSearchController: Track {$track?->spotify_id} saved.");
+            }
+        }
 
         return Redirect::back()->with('success', 'Artist found.');
     }
