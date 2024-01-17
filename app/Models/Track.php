@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Artist extends Model
+class Track extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,9 +17,14 @@ class Artist extends Model
      */
     protected $fillable = [
         'spotify_id',
+        'album_spotify_id',
+        'album_name',
+        'album_image_url',
+        'album_release_date',
+        'album_total_tracks',
         'name',
-        'image_url',
-        'follower_count',
+        'popularity',
+        'duration_ms',
         'searched_at',
     ];
 
@@ -30,14 +35,19 @@ class Artist extends Model
      */
     protected $casts = [
         'spotify_id' => 'string',
+        'album_spotify_id' => 'string',
+        'album_name' => 'string',
+        'album_image_url' => 'string',
+        'album_release_date' => 'datetime',
+        'album_total_tracks' => 'integer',
         'name' => 'string',
-        'image_url' => 'string',
-        'follower_count' => 'integer',
+        'popularity' => 'integer',
+        'duration_ms' => 'integer',
         'searched_at' => 'datetime',
     ];
 
-    public function tracks()
+    public function artist()
     {
-        return $this->hasMany(Track::class);
+        return $this->belongsTo(Artist::class);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Artist;
+use App\Models\Track;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class ArtistSeeder extends Seeder
+class TrackSeeder extends Seeder
 {
     use WithoutModelEvents;
 
@@ -18,10 +18,9 @@ class ArtistSeeder extends Seeder
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
-        DB::table('artists')->truncate();
         DB::table('tracks')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        Artist::factory(10)->hasTracks(10)->create();
+        Track::factory(20)->create();
     }
 }
