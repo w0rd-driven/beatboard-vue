@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import ArtistSearchForm from '@/Pages/Artist/ArtistSearchForm.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -13,7 +14,6 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -32,15 +32,13 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('artist.index')" :active="route().current('artist.index')">
                                     Artists
                                 </NavLink>
-                                <NavLink :href="route('search')" :active="route().current('search')">
-                                    Search
-                                </NavLink>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <ArtistSearchForm class="w-64" />
                             <!-- Settings Dropdown -->
-                            <div class="ms-3 relative">
+                            <div class="ms-3 relative shrink-0">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -118,9 +116,7 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('artist.index')" :active="route().current('artist.index')">
                             Artists
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('search')" :active="route().current('search')">
-                            Search
-                        </ResponsiveNavLink>
+                        <ArtistSearchForm class="pt-1" />
                     </div>
 
                     <!-- Responsive Settings Options -->

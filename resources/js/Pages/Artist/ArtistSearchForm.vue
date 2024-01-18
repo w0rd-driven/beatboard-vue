@@ -1,6 +1,5 @@
 <script setup>
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
 import SearchBar from '@/Components/SearchBar.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
@@ -31,18 +30,8 @@ const searchArtist = () => {
 
 <template>
     <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Search for Artists</h2>
-
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Put some useful text here.
-            </p>
-        </header>
-
-        <form @submit.prevent="searchArtist" class="mt-6 space-y-6">
+        <form @submit.prevent="searchArtist" class="">
             <div>
-                <InputLabel for="search_text" value="Search" />
-
                 <SearchBar
                     id="search_text"
                     ref="searchTextInput"

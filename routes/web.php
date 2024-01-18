@@ -30,10 +30,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/search', function () {
-    return Inertia::render('Search');
-})->middleware(['auth', 'verified'])->name('search');
-
 Route::middleware('auth')->group(function () {
     // Artist
     Route::get('/artists', [ArtistController::class, 'index'])->name('artist.index');
