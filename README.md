@@ -1,66 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BeatBoard
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A take home assignment exercise of leveraging the Spotify API to see your favorite artist's top tracks.
 
-## About Laravel
+### Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* [Installation](#installation)
+* [Using the Application](#using-the-application)
+* [Isolate Testing Database](#isolate-testing-database)
+* [Topics Covered](#topics-covered)
+* [Known Issues](#known-issues)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Clone the repository `git clone ...`
+2. Change directory to the new repo `cd beatboard-vue`
+3. Configure your [Spotify App](https://developer.spotify.com/dashboard) to get the `Client ID` and `Client Secret`.
+4. Create the environment variable file `cp .env.example .env`
+5. Change your defaults for things like `DB_DATABASE`, `DB_PASSWORD`, etc.
+6. If you're using `asdf` or `mise` a supplied `.tool-versions` will install Node v20 for the frontend assets.
+    1. `mise install` should install the runtime dependencies.
+7. Configure valet `valet link --secure` and clear the security prompt creating the SSL certificate.
+8. If running a newer version, use php 8.2 `valet isolate php@8.2`
+9. Install composer dependencies `[valet] composer install`.
+    1. The `valet` prefix is needed if you're not running the same PHP version.
+10. Install node dependencies `npm install`.
+11. Create and migrate the database `./artisan migrate --step`
+12. Run the frontend vite server `npm run dev`.
+    1. Run `npm run build` in CI or during deployments to build the SSR assets without needing the vite server running.
 
-## Learning Laravel
+## Using the Application
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* You can seed 10 artists with 10 tracks via `./artisan db:seed`.
+* Navigate to [https://beatboard.test](https://beatboard.test).
+* Register a new user or login if you're returning.
+* You should be on the page [https://beatboard.test/artists](https://beatboard.test/artists).
+* Search for new artists via the search bar in the navigation menu.
+* Click on an artist to view their popular tracks.
+* Click the `Artists` link in the breadcrumb header, click the `Artists` navigation heading, or use your browser's back button to go back.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Isolate Testing Database
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Create the testing environment variable file `cp .env.example .env.testing`.
+2. Change `APP_ENV` to `testing`.
+3. Change `DB_DATABASE=beatboard_testing` to run your tests in a different database.
+4. Run `./artisan migrate --step --env=testing` to create the database and run migrations.
+5. Run `./artisan test` to execute the full test suite.
 
-## Laravel Sponsors
+## Topics Covered
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* Configuring and using an API or SDK.
+* Making multiple Spotify calls in a controller method.
+* Component architectures with Vue3 and Inertia.js
+* Data transformation
+* Master > Detail views
+* Responsive web design
+* Model relationships
+* Jobs and Queues
+* Factories
+* Seeds
+* Task scheduling
+* Testing
+* Mocking
+* Logging
+* Extra credit ideas in [Extra Credit](documentation/todo.md#extra-credit).
 
-### Premium Partners
+## Known Issues
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* It was personal preference to look for only popular tracks that are part of an artist's albums.
+    * There have been cases where no tracks were returned for obscure bands.
+    * Now that I no longer match exact case for band names this shouldn't really happen in practice, it always chooses the most popular band given the results.
