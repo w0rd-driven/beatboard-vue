@@ -9,6 +9,7 @@ A take home assignment exercise of leveraging the Spotify API to see your favori
 * [Isolate Testing Database](#isolate-testing-database)
 * [Topics Covered](#topics-covered)
 * [Known Issues](#known-issues)
+* [Laravel Readme](#laravel-readme)
 
 ## Installation
 
@@ -69,3 +70,7 @@ A take home assignment exercise of leveraging the Spotify API to see your favori
 * It was personal preference to look for only popular tracks that are part of an artist's albums.
     * There have been cases where no tracks were returned for obscure bands.
     * Now that I no longer match exact case for band names this shouldn't really happen in practice, it always chooses the most popular band given the results.
+
+## Laravel Readme
+
+The original Laravel readme can be found at [README](README-Laravel.md)
