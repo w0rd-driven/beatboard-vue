@@ -24,7 +24,7 @@ class ArtistController extends Controller
     public function show(Artist $artist)
     {
         return Inertia::render('Artist/Show', [
-            'artist' => $artist,
+            'artist' => $artist->load('tracks'),
         ]);
     }
 
