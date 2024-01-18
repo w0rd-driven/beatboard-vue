@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Artist;
+use App\Transformers\ArtistTransformer;
+use App\Transformers\TrackTransformer;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Spotify;
@@ -36,5 +38,30 @@ class ArtistRepository
         return $items->filter(function ($artist) {
             return Arr::get($artist, 'album.album_type') ===  'album';
         });
+    }
+
+    public function saveArtist($query, ArtistTransformer $transformer): mixed
+    {
+        $response = $this->searchArtists($query);
+        $attributes = $transformer->transform($response);
+        $artist = Artist::updateOrCreate(
+            ['spotify_id' => Arr::get($attributes, 'spotify_id')],
+            $attributes,
+        );
+        Log::channel('search')->debug("ArtistRepository: Artist {$artist?->spotify_id} saved.");
+        return $artist;
+    }
+
+    public function saveTopTracks(?Artist $artist, TrackTransformer $transformer)
+    {
+        $tracks = $this->getTopTracks($artist);
+        foreach ($tracks as $track) {
+            $attributes = $transformer->transform($track);
+            $track = $artist->tracks()->updateOrCreate(
+                ['spotify_id' => Arr::get($attributes, 'spotify_id')],
+                $attributes,
+            );
+            Log::channel('search')->debug("ArtistRepository: Track {$track?->spotify_id} saved.");
+        }
     }
 }
