@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\FetchTopTracksCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +13,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command(FetchTopTracksCommand::class)
+            ->withoutOverlapping()
+            ->weeklyOn(1, "03:00")
+            ->timezone('America/New_York')
+            ->sendOutputTo(storage_path('logs/fetch-toptracks.log'), true);
     }
 
     /**
