@@ -24,7 +24,7 @@ class ArtistRepository
         $items = collect(Arr::get($response, 'artists.items', []));
 
         return $items->filter(function ($artist) use ($query) {
-            return Arr::get($artist, 'name') === $query && Arr::get($artist, 'type') === 'artist';
+            return Arr::get($artist, 'type') === 'artist';
         })?->sortByDesc('followers.total')?->first();
     }
 
@@ -44,24 +44,40 @@ class ArtistRepository
     {
         $response = $this->searchArtists($query);
         $attributes = $transformer->transform($response);
-        $artist = Artist::updateOrCreate(
-            ['spotify_id' => Arr::get($attributes, 'spotify_id')],
-            $attributes,
-        );
-        Log::channel('search')->debug("ArtistRepository: Artist {$artist?->spotify_id} saved.");
+        $spotifyId = Arr::get($attributes, 'spotify_id');
+        $artist = null;
+
+        if ($spotifyId) {
+            $artist = Artist::updateOrCreate(
+                ['spotify_id' => $spotifyId],
+                $attributes,
+            );
+            Log::channel('search')->debug("ArtistRepository: Artist {$artist?->spotify_id} saved.");
+        } else {
+            Log::channel('search')->debug("ArtistRepository: Artist $query NOT saved.");
+        }
+
         return $artist;
     }
 
     public function saveTopTracks(?Artist $artist, TrackTransformer $transformer)
     {
         $tracks = $this->getTopTracks($artist);
+
         foreach ($tracks as $track) {
             $attributes = $transformer->transform($track);
-            $track = $artist->tracks()->updateOrCreate(
-                ['spotify_id' => Arr::get($attributes, 'spotify_id')],
-                $attributes,
-            );
-            Log::channel('search')->debug("ArtistRepository: Track {$track?->spotify_id} saved.");
+            $spotifyId = Arr::get($attributes, 'spotify_id');
+            if ($spotifyId) {
+                $track = $artist->tracks()->updateOrCreate(
+                    ['spotify_id' => $spotifyId],
+                    $attributes,
+                );
+                Log::channel('search')->debug("ArtistRepository: Track {$track?->spotify_id} saved.");
+            } else {
+                Log::channel('search')->debug("ArtistRepository: Track NOT saved.");
+            }
         }
+
+        return $artist;
     }
 }
