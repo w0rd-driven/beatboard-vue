@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tracks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('artist_id')->constrained();
-            $table->string('spotify_id');
+            $table->string('spotify_id')->unique();
             $table->string('album_spotify_id');
             $table->string('album_name');
-            $table->string('album_image_url');
+            $table->string('album_image_url')->nullable();
             $table->dateTime('album_release_date');
             $table->unsignedInteger('album_total_tracks');
             $table->string('name');
