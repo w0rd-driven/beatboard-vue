@@ -56,6 +56,7 @@ A take home assignment exercise of leveraging the Spotify API to see your favori
 * Master > Detail views
 * Responsive web design
 * Model relationships
+* FormRequests
 * Jobs and Queues
 * Factories
 * Seeds

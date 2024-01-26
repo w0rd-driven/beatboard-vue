@@ -14,6 +14,9 @@
 
 ## Extra credit
 
+* Database Indexing
+    * What field(s) could be indexed in the existing structure?
+    * MySQL / MariaDB will not do this by default for a column type.
 * Laravel Topics
     * Broadcasting
         * How could websockets be used to push controller responses to background jobs?

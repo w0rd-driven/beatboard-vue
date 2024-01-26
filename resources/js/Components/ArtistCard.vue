@@ -19,7 +19,7 @@ const props = defineProps({
             </div>
             <div class="p-2">
                 <p class="font-semibold text-indigo-800 text-xl">{{ artist.name }}</p>
-                <p class="text-gray-600"><span class="font-semibold">Followers</span>: {{ artist.follower_count }}</p>
+                <p class="text-gray-600"><span class="font-semibold">Followers</span>: {{ artist?.follower_count || 0 }}</p>
                 <p class="text-gray-600 text-xs">Created: {{ convertRelativeTime(artist.created_at) }} ago</p>
             </div>
         </Link>
