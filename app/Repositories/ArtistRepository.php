@@ -7,6 +7,7 @@ use App\Transformers\ArtistTransformer;
 use App\Transformers\TrackTransformer;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Spotify;
 
 class ArtistRepository
@@ -24,7 +25,7 @@ class ArtistRepository
         $items = collect(Arr::get($response, 'artists.items', []));
 
         return $items->filter(function ($artist) use ($query) {
-            return Arr::get($artist, 'type') === 'artist';
+            return Str::lower(Arr::get($artist, 'name')) == Str::lower($query) && Arr::get($artist, 'type') === 'artist';
         })?->sortByDesc('followers.total')?->first();
     }
 
